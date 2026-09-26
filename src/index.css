@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #08090B;
+    --card: #111317;
+    --border: #24272D;
+    --foreground: #F5F5F5;
+    --muted: #8B9099;
+    --accent: #00E5FF;
+  }
+  
+  html.light {
+    --background: #F5F7FA;
+    --card: #FFFFFF;
+    --border: #E2E8F0;
+    --foreground: #0F172A;
+    --muted: #64748B;
+    --accent: #007685;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased transition-colors duration-300;
+  }
+}
+
+/* Hide scrollbar for clean horizontal scrolling */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
