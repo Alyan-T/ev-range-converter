@@ -115,21 +115,10 @@ export default function Converter() {
   };
 
   return (
-    <div className="flex flex-col items-center pt-8 md:pt-16 pb-20">
-      <div className="text-center max-w-2xl mx-auto mb-12 w-full">
-        <div className="flex justify-center mb-6">
-          <img src="/EV_range_logo.webp" alt="RangeConvert Logo" width="96" height="96" loading="eager" fetchPriority="high" className="w-24 h-24 rounded-[2rem] shadow-2xl border-4 border-card object-cover" />
-        </div>
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">EV RANGE CONVERTER</h1>
-        <p className="text-lg text-muted mb-6">Compare NEDC, WLTP, CLTC and EPA range in seconds.</p>
-        
-        <button 
-          onClick={handleShare}
-          className="mx-auto flex items-center justify-center space-x-2 bg-card border border-border px-4 py-2 rounded-xl text-sm text-muted hover:text-foreground hover:border-muted transition-colors"
-        >
-          {copied ? <Check className="w-4 h-4 text-accent" /> : <Share2 className="w-4 h-4" />}
-          <span>{copied ? "Link Copied!" : "Share Converter"}</span>
-        </button>
+    <div className="flex flex-col items-center pt-2 md:pt-8 pb-10">
+      <div className="text-center max-w-2xl mx-auto mb-6 w-full">
+        <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-2 leading-tight">EV RANGE CONVERTER</h1>
+        <p className="text-base text-muted mb-2">Compare NEDC, WLTP, CLTC, and EPA instantly.</p>
       </div>
 
       <div className="w-full max-w-xl mx-auto bg-card rounded-3xl border border-border p-6 md:p-10 shadow-2xl">
@@ -372,6 +361,13 @@ export default function Converter() {
                 <span>View methodology</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
+              <button 
+                onClick={handleShare}
+                className="flex items-center justify-center space-x-2 bg-card border border-border px-4 py-2 rounded-xl text-sm text-muted hover:text-foreground hover:border-muted transition-colors mt-6"
+              >
+                {copied ? <Check className="w-4 h-4 text-accent" /> : <Share2 className="w-4 h-4" />}
+                <span>{copied ? "Link Copied!" : "Share Results"}</span>
+              </button>
             </div>
 
           </motion.div>
