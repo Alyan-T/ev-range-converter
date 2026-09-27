@@ -90,8 +90,9 @@ export default function VehicleDetail() {
         <img 
           src={car.image || `https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=1200&q=80`} 
           alt={`${car.make} ${car.model}`} 
+          fetchPriority="high"
+          decoding="async"
           className="w-full h-full object-cover"
-          referrerPolicy="no-referrer"
         />
         {!car.image && (
           <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent flex items-end p-6 pointer-events-none">

@@ -172,8 +172,9 @@ export default function Cars() {
                   <img 
                     src={car.image || `https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=600&q=80`} 
                     alt={`${car.make} ${car.model}`} 
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover"
-                    referrerPolicy="no-referrer"
                   />
                   {!car.image && (
                     <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent flex items-end p-4 pointer-events-none">
