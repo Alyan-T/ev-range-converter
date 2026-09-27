@@ -5,7 +5,7 @@ import { convertRange } from "@/lib/converter";
 import { kmToMiles, milesToKm } from "@/lib/units";
 import { formatRange, parseRangeInput } from "@/lib/formatting";
 import RangeComparison from "@/components/RangeComparison";
-import { ArrowRight, Info, Share2, Check } from "lucide-react";
+import { ArrowRight, Info, Share2, Check, Minus, Plus } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
@@ -155,7 +155,21 @@ export default function Converter() {
               </div>
             </div>
             
-            <div className="relative">
+            <div className="relative flex items-center">
+              <button
+                onClick={() => {
+                  const val = parseInt(inputValue || "0", 10);
+                  if (!isNaN(val)) {
+                    setInputValue(Math.max(0, val - 10).toString());
+                    setError(null);
+                  }
+                }}
+                className="absolute left-4 z-10 p-3 rounded-xl bg-card border border-border text-muted hover:text-foreground hover:border-muted transition-colors active:scale-95"
+                aria-label="Decrease range"
+              >
+                <Minus className="w-6 h-6" />
+              </button>
+
               <input
                 type="text"
                 value={inputValue}
@@ -165,12 +179,28 @@ export default function Converter() {
                   setError(null);
                 }}
                 onKeyDown={(e) => e.key === "Enter" && handleConvert()}
-                className="w-full bg-background border border-border rounded-2xl text-4xl md:text-6xl font-light text-center py-6 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
+                className="w-full bg-background border border-border rounded-2xl text-4xl md:text-6xl font-light text-center py-6 px-20 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
                 placeholder="0"
               />
-              <span className="absolute right-8 top-1/2 -translate-y-1/2 text-2xl text-muted font-light pointer-events-none">
-                {inputUnit}
-              </span>
+
+              <div className="absolute right-4 z-10 flex items-center gap-2 md:gap-3">
+                <span className="text-xl md:text-2xl text-muted font-light pointer-events-none">
+                  {inputUnit}
+                </span>
+                <button
+                  onClick={() => {
+                    const val = parseInt(inputValue || "0", 10);
+                    if (!isNaN(val)) {
+                      setInputValue((val + 10).toString());
+                      setError(null);
+                    }
+                  }}
+                  className="p-3 rounded-xl bg-card border border-border text-muted hover:text-foreground hover:border-muted transition-colors active:scale-95"
+                  aria-label="Increase range"
+                >
+                  <Plus className="w-6 h-6" />
+                </button>
+              </div>
             </div>
 
             <div className="flex justify-center gap-2 mt-2">
