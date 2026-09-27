@@ -148,8 +148,8 @@ export default function VehicleDetail() {
         
         {(() => {
           const epa = fullRanges.EPA;
-          const officialStd = Object.keys(vehicle.ranges).find(k => vehicle.ranges[k as keyof typeof vehicle.ranges] !== null);
-          const officialVal = officialStd ? vehicle.ranges[officialStd as keyof typeof vehicle.ranges] : null;
+          const officialStd = Object.keys(car.ranges).find(k => car.ranges[k as keyof typeof car.ranges] !== null);
+          const officialVal = officialStd ? car.ranges[officialStd as keyof typeof car.ranges] : null;
           
           if (epa && officialVal && officialStd && officialStd !== "EPA" && officialVal > epa) {
             const diff = Math.round((1 - (epa / officialVal)) * 100);

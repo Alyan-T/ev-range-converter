@@ -264,7 +264,7 @@ export const demoVehicles: Vehicle[] = [
     variant: "SUV",
     year: 2026,
     bodyStyle: "SUV",
-    batteryKwh: 68.0,
+    batteryKwh: 44.94,
     isDemoData: false,
     ranges: { EPA: null, WLTP: null, CLTC: null, NEDC: 403 },
     pakistan: { available: true, priceFormatted: "PKR 78.5 lac", pricePkr: 7850000 },
