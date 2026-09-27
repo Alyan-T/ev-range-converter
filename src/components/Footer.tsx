@@ -24,8 +24,9 @@ export default function Footer() {
             <Link to="/about" className="hover:text-foreground transition-colors">About</Link>
           </div>
         </div>
-        <div className="mt-12 pt-8 border-t border-border text-sm text-muted flex justify-between items-center">
-          <p>© 2026 RangeConvert</p>
+        <div className="mt-12 pt-8 border-t border-border text-sm text-muted flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+          <p>&copy; {new Date().getFullYear()} RangeConvert</p>
+          <p>Built by <span className="text-foreground font-semibold tracking-wide">HyperSoft</span></p>
           <p>Not an official certification tool.</p>
         </div>
       </div>
