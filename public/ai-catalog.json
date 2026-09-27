@@ -1,0 +1,19 @@
+{
+  "name": "EV-range-Converter",
+  "description": "Electric vehicle range standard converter.",
+  "tools": [
+    {
+      "name": "convert_range",
+      "description": "Converts EV range between standards",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "kilometers": {
+            "type": "number",
+            "description": "The range in kilometers"
+          }
+        }
+      }
+    }
+  ]
+}

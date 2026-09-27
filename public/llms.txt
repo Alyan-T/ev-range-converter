@@ -1,0 +1,5 @@
+﻿# VoltRange
+> An electric vehicle range converter that instantly compares NEDC, WLTP, CLTC, and EPA battery mileage standards.
+
+## Tools
+- [VoltRange Calculator](https://www.ev-range-converter.app/): Calculate and compare EV ranges.
