@@ -64,6 +64,7 @@ export default function VehicleDetail() {
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight uppercase">{car.make} {car.model}</h1>
             <button 
               onClick={toggleFavorite}
+              aria-label="Toggle Favorite"
               className={`p-3 rounded-full border border-border hover:bg-card transition-colors ${favorites.includes(car.id) ? "text-red-500 bg-red-500/10 border-red-500/30" : "text-muted bg-background"}`}
             >
               <Heart className={`w-6 h-6 ${favorites.includes(car.id) ? "fill-current" : ""}`} />

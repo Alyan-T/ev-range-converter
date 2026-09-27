@@ -118,7 +118,7 @@ export default function Converter() {
     <div className="flex flex-col items-center pt-8 md:pt-16 pb-20">
       <div className="text-center max-w-2xl mx-auto mb-12 w-full">
         <div className="flex justify-center mb-6">
-          <img src="/EV_range_logo.webp" alt="RangeConvert Logo" className="w-24 h-24 rounded-[2rem] shadow-2xl border-4 border-card object-cover" />
+          <img src="/EV_range_logo.webp" alt="RangeConvert Logo" width="96" height="96" loading="eager" fetchPriority="high" className="w-24 h-24 rounded-[2rem] shadow-2xl border-4 border-card object-cover" />
         </div>
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">EV RANGE CONVERTER</h1>
         <p className="text-lg text-muted mb-6">Compare NEDC, WLTP, CLTC and EPA range in seconds.</p>

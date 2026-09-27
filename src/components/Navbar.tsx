@@ -1,4 +1,4 @@
-﻿import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Moon, Sun, Calculator, BarChart2, Car, BookOpen } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -40,7 +40,7 @@ export default function Navbar() {
           <div className="flex justify-between items-center h-16 md:h-20">
             <Link to="/" className="flex items-center space-x-3 group">
               <div className="bg-card p-1.5 rounded-xl group-hover:bg-border transition-colors border border-border flex items-center justify-center">
-                <img src="/EV_range_logo.webp" alt="RangeConvert Logo" className="w-8 h-8 object-cover rounded-lg" />
+                <img src="/EV_range_logo.webp" alt="RangeConvert Logo" width="32" height="32" loading="eager" fetchPriority="high" className="w-8 h-8 object-cover rounded-lg" />
               </div>
               <span className="font-bold text-xl tracking-tight">VoltRange</span>
             </Link>
@@ -78,6 +78,7 @@ export default function Navbar() {
               <button 
                 onClick={toggleTheme}
                 className="p-2 text-muted hover:text-foreground transition-colors rounded-full"
+                aria-label="Toggle Theme"
               >
                 {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </button>
