@@ -231,6 +231,10 @@ export default function Cars() {
           );
         })}
       </div>
+
+      <div className="mt-12 text-center text-sm text-muted">
+        Vehicle images and some pricing data sourced from <a href="https://www.pakwheels.com" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">PakWheels.com</a>
+      </div>
     </div>
   );
 }
