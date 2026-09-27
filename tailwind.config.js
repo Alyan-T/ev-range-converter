@@ -14,9 +14,12 @@ export default {
         border: "var(--border)",
         muted: "var(--muted)",
         accent: "var(--accent)",
+        "realism-accent": "var(--realism-accent)",
+        warning: "var(--warning)",
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
+        sans: ['"Plus Jakarta Sans"', "system-ui", "sans-serif"],
+        mono: ['"JetBrains Mono"', "monospace"],
       }
     },
   },

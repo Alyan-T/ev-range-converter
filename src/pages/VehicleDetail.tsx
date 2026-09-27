@@ -145,6 +145,25 @@ export default function VehicleDetail() {
         <h3 className="text-sm font-semibold tracking-widest text-muted mb-8 uppercase">Range Visualization</h3>
         {/* We use fullRanges so the visualization includes both official and estimated values */}
         <RangeComparison ranges={fullRanges as any} unit="km" />
+        
+        {(() => {
+          const epa = fullRanges.EPA;
+          const officialStd = Object.keys(vehicle.ranges).find(k => vehicle.ranges[k as keyof typeof vehicle.ranges] !== null);
+          const officialVal = officialStd ? vehicle.ranges[officialStd as keyof typeof vehicle.ranges] : null;
+          
+          if (epa && officialVal && officialStd && officialStd !== "EPA" && officialVal > epa) {
+            const diff = Math.round((1 - (epa / officialVal)) * 100);
+            return (
+              <div className="mt-8 flex items-start space-x-3 bg-red-500/10 border border-red-500/20 p-4 rounded-xl text-red-500 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                <div>
+                  <strong>Discrepancy Warning:</strong> Realistic EPA range ({Math.round(epa)} km) is roughly <strong>{diff}% lower</strong> than the manufacturer's official {officialStd} claim ({Math.round(officialVal)} km).
+                </div>
+              </div>
+            );
+          }
+          return null;
+        })()}
       </div>
 
       {/* Verification Footer */}

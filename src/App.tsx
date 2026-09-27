@@ -25,7 +25,7 @@ function App() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <main className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+      <main className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-24 md:py-12">
         <Routes>
           <Route path="/" element={<Converter />} />
           <Route path="/compare" element={<Compare />} />
