@@ -1,13 +1,38 @@
 import { useState } from "react";
-import { Mail, Send, MapPin, CheckCircle2 } from "lucide-react";
+import { Mail, Send, MapPin, CheckCircle2, Phone } from "lucide-react";
 
 export default function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // In a real app, this would ping Formspree or EmailJS
-    setIsSubmitted(true);
+    setIsSubmitting(true);
+    setError(null);
+
+    const formData = new FormData(e.currentTarget);
+    // Replace this string with your Web3Forms Access Key
+    formData.append("access_key", "YOUR_WEB3FORMS_ACCESS_KEY");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setIsSubmitted(true);
+      } else {
+        setError(data.message || "Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      setError("Failed to send message. Please check your internet connection.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -30,7 +55,7 @@ export default function Contact() {
               </div>
               <div>
                 <h3 className="font-semibold">Email Us</h3>
-                <p className="text-muted">hello@ev-range-converter.app</p>
+                <p className="text-muted">hypersoft086@gmail.com</p>
               </div>
             </div>
             
@@ -40,7 +65,17 @@ export default function Contact() {
               </div>
               <div>
                 <h3 className="font-semibold">Headquarters</h3>
-                <p className="text-muted">Lahore, Pakistan (Global Data Hub)</p>
+                <p className="text-muted">Faisalabad, Pakistan</p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <div className="p-3 bg-card border border-border rounded-xl">
+                <Phone className="w-6 h-6 text-accent" />
+              </div>
+              <div>
+                <h3 className="font-semibold">Phone</h3>
+                <p className="text-muted">+92 300 1234567</p>
               </div>
             </div>
           </div>
@@ -64,14 +99,19 @@ export default function Contact() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
+              {error && (
+                <div className="p-3 bg-red-500/10 border border-red-500/30 text-red-500 rounded-lg text-sm">
+                  {error}
+                </div>
+              )}
               <div className="space-y-2">
                 <label htmlFor="name" className="text-sm font-medium text-muted uppercase tracking-wider">Name</label>
                 <input 
                   type="text" 
-                  id="name"
+                  id="name" name="name"
                   required
                   className="w-full bg-background border border-border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors"
-                  placeholder="John Doe"
+                  placeholder="Shahmeer Ali"
                 />
               </div>
 
@@ -79,17 +119,17 @@ export default function Contact() {
                 <label htmlFor="email" className="text-sm font-medium text-muted uppercase tracking-wider">Email</label>
                 <input 
                   type="email" 
-                  id="email"
+                  id="email" name="email"
                   required
                   className="w-full bg-background border border-border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors"
-                  placeholder="john@example.com"
+                  placeholder="shahmeer@example.com"
                 />
               </div>
 
               <div className="space-y-2">
                 <label htmlFor="message" className="text-sm font-medium text-muted uppercase tracking-wider">Message</label>
                 <textarea 
-                  id="message"
+                  id="message" name="message"
                   required
                   rows={4}
                   className="w-full bg-background border border-border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors resize-none"
@@ -101,8 +141,8 @@ export default function Contact() {
                 type="submit"
                 className="w-full bg-foreground text-background font-semibold py-4 rounded-xl hover:bg-white transition-colors flex items-center justify-center space-x-2"
               >
-                <span>Send Message</span>
-                <Send className="w-4 h-4" />
+                <span>{isSubmitting ? "Sending..." : "Send Message"}</span>
+                {!isSubmitting && <Send className="w-4 h-4" />}
               </button>
             </form>
           )}
