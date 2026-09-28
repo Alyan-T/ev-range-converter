@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -42,6 +43,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
+      <SpeedInsights />
     </div>
   );
 }
