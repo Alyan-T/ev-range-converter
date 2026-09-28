@@ -9,6 +9,8 @@ import { convertRange } from "@/lib/converter";
 export default function VehicleDetail() {
   const { id } = useParams();
   const car = demoVehicles.find((v) => v.id === id);
+  const [isReporting, setIsReporting] = useState(false);
+  const [isReported, setIsReported] = useState(false);
   
   const [favorites, setFavorites] = useState<string[]>(() => {
     const saved = localStorage.getItem("favoriteCars");
@@ -148,24 +150,28 @@ export default function VehicleDetail() {
         {/* We use fullRanges so the visualization includes both official and estimated values */}
         <RangeComparison ranges={fullRanges as any} unit="km" />
         
-        {(() => {
-          const epa = fullRanges.EPA;
-          const officialStd = Object.keys(car.ranges).find(k => car.ranges[k as keyof typeof car.ranges] !== null);
-          const officialVal = officialStd ? car.ranges[officialStd as keyof typeof car.ranges] : null;
-          
-          if (epa && officialVal && officialStd && officialStd !== "EPA" && officialVal > epa) {
-            const diff = Math.round((1 - (epa / officialVal)) * 100);
-            return (
-              <div className="mt-8 flex items-start space-x-3 bg-red-500/10 border border-red-500/20 p-4 rounded-xl text-red-500 text-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
-                <div>
-                  <strong>Discrepancy Warning:</strong> Realistic EPA range ({Math.round(epa)} km) is roughly <strong>{diff}% lower</strong> than the manufacturer's official {officialStd} claim ({Math.round(officialVal)} km).
-                </div>
-              </div>
-            );
-          }
-          return null;
-        })()}
+                {isReported ? (
+          <div className="flex items-center space-x-2 text-realism-accent bg-realism-accent/10 px-4 py-2 rounded-lg border border-realism-accent/20">
+            <CheckCircle2 className="w-4 h-4" />
+            <span>Report submitted</span>
+          </div>
+        ) : isReporting ? (
+          <div className="w-full sm:w-auto mt-4 sm:mt-0 flex flex-col sm:flex-row gap-2">
+            <input type="text" placeholder="What's wrong? (e.g. WLTP is 530)" className="bg-card border border-border rounded-lg px-3 py-2 focus:outline-none focus:border-accent text-foreground text-sm" />
+            <div className="flex gap-2">
+              <button onClick={() => setIsReported(true)} className="bg-accent text-background px-4 py-2 rounded-lg font-medium hover:opacity-90 text-sm">Submit</button>
+              <button onClick={() => setIsReporting(false)} className="bg-card border border-border px-4 py-2 rounded-lg hover:bg-border text-sm">Cancel</button>
+            </div>
+          </div>
+        ) : (
+          <button 
+            onClick={() => setIsReporting(true)}
+            className="flex items-center space-x-2 text-muted hover:text-warning transition-colors bg-card px-4 py-2 rounded-lg border border-border hover:border-warning/50"
+          >
+            <Flag className="w-4 h-4" />
+            <span>Report incorrect data</span>
+          </button>
+        )}
       </div>
 
       {/* Verification Footer */}
@@ -175,10 +181,41 @@ export default function VehicleDetail() {
           <p><span className="font-semibold text-foreground">Verified:</span> {car.lastVerified}</p>
         </div>
         
-        <button className="flex items-center space-x-2 text-muted hover:text-red-400 transition-colors bg-card px-4 py-2 rounded-lg border border-border">
-          <Flag className="w-4 h-4" />
-          <span>Report incorrect data</span>
-        </button>
+        {(() => {
+          const [isReporting, setIsReporting] = useState(false);
+          const [isReported, setIsReported] = useState(false);
+
+          if (isReported) {
+            return (
+              <div className="flex items-center space-x-2 text-realism-accent bg-realism-accent/10 px-4 py-2 rounded-lg border border-realism-accent/20">
+                <CheckCircle2 className="w-4 h-4" />
+                <span>Report submitted</span>
+              </div>
+            );
+          }
+
+          if (isReporting) {
+            return (
+              <div className="w-full sm:w-auto mt-4 sm:mt-0 flex flex-col sm:flex-row gap-2">
+                <input type="text" placeholder="What's wrong? (e.g. WLTP is 530)" className="bg-card border border-border rounded-lg px-3 py-2 focus:outline-none focus:border-accent text-foreground" />
+                <div className="flex gap-2">
+                  <button onClick={() => setIsReported(true)} className="bg-accent text-background px-4 py-2 rounded-lg font-medium hover:opacity-90">Submit</button>
+                  <button onClick={() => setIsReporting(false)} className="bg-card border border-border px-4 py-2 rounded-lg hover:bg-border">Cancel</button>
+                </div>
+              </div>
+            );
+          }
+
+          return (
+            <button 
+              onClick={() => setIsReporting(true)}
+              className="flex items-center space-x-2 text-muted hover:text-warning transition-colors bg-card px-4 py-2 rounded-lg border border-border hover:border-warning/50"
+            >
+              <Flag className="w-4 h-4" />
+              <span>Report incorrect data</span>
+            </button>
+          );
+        })()}
       </div>
 
     </div>

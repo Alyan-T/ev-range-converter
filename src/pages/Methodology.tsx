@@ -72,7 +72,7 @@ export default function Methodology() {
         <div className="bg-card border border-border p-8 rounded-3xl mt-12">
           <h3 className="text-xl font-bold text-foreground mb-4">How our converter works</h3>
           <p className="text-muted text-sm leading-relaxed mb-4">
-            RangeConvert uses empirical coefficients derived from analyzing EVs that have been officially certified under multiple testing cycles. However, aerodynamic drag, vehicle mass, and drivetrain efficiency scale differently across these test cycles.
+            VoltRange uses empirical coefficients derived from analyzing EVs that have been officially certified under multiple testing cycles. However, aerodynamic drag, vehicle mass, and drivetrain efficiency scale differently across these test cycles.
           </p>
           <p className="text-muted text-sm leading-relaxed">
             Therefore, a single universal mathematical multiplier cannot perfectly convert between standards for every vehicle. Our tool provides the closest approximate baseline, but official certification figures should always be consulted for final purchasing decisions.

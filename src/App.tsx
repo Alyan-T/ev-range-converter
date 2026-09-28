@@ -7,6 +7,8 @@ import Cars from "@/pages/Cars";
 import VehicleDetail from "@/pages/VehicleDetail";
 import Methodology from "@/pages/Methodology";
 import About from "@/pages/About";
+import FAQ from "@/pages/FAQ";
+import Contact from "@/pages/Contact";
 import { useEffect } from "react";
 
 function App() {
@@ -33,6 +35,8 @@ function App() {
           <Route path="/cars/:id" element={<VehicleDetail />} />
           <Route path="/methodology" element={<Methodology />} />
           <Route path="/about" element={<About />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
       <Footer />
