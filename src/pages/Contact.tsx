@@ -12,8 +12,7 @@ export default function Contact() {
     setError(null);
 
     const formData = new FormData(e.currentTarget);
-    // Replace this string with your Web3Forms Access Key
-    formData.append("access_key", "YOUR_WEB3FORMS_ACCESS_KEY");
+    formData.append("access_key", "2717968b-00e9-49be-9609-14f7e0d3ce85");
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -75,7 +74,7 @@ export default function Contact() {
               </div>
               <div>
                 <h3 className="font-semibold">Phone</h3>
-                <p className="text-muted">+92 300 1234567</p>
+                <p className="text-muted">+92 311 6992886</p>
               </div>
             </div>
           </div>
